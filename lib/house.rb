@@ -41,4 +41,26 @@ class House
     house_details["address"] =  @address
     house_details
   end
+
+  def price_per_square_foot
+    (400000 / area.to_f).round(2)
+  end
+
+    def rooms_sorted_by_area
+      @rooms.map.sort do |room|
+        (room.length * room.width.to_i)
+      end
+    end
+
+    def rooms_by_category
+      category_rooms = {}
+      @rooms.each do |room|
+        if category_rooms[room.category]
+          category_rooms[room.category].push(room)
+        else
+          category_rooms[room.category] = [room]
+        end
+      end
+      category_rooms
+    end
 end
