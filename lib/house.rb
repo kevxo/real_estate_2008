@@ -13,18 +13,14 @@ class House
   end
 
   def above_market_average?
-    return false if @price.to_i < 500000
+    return false if @price.split("$")[1].to_i < 500000
     true
   end
 
   def rooms_from_category(category)
-    room_array = []
-    @rooms.each do |room|
-      if category == room.category
-        room_array << room
-      end
+    @rooms.find_all do |room|
+      category == room.category
     end
-    room_array
   end
 
   def area
@@ -37,13 +33,13 @@ class House
 
   def details
     house_details = {}
-    house_details["price"] = @price
+    house_details["price"] = @price.split("$")[1].to_i
     house_details["address"] =  @address
     house_details
   end
 
   def price_per_square_foot
-    (400000 / area.to_f).round(2)
+    (@price.split('$')[1].to_i / area.to_f).round(2)
   end
 
     def rooms_sorted_by_area

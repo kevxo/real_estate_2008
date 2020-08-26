@@ -32,8 +32,10 @@ class HouseTest < Minitest::Test
 
   def test_it_is_above_market_average
     house = House.new("$400000", "123 sugar lane")
+    house2 = House.new("$600000", "123 sugar lane")
 
     assert_equal false, house.above_market_average?
+    assert_equal true, house2.above_market_average?
   end
 
 
@@ -72,7 +74,7 @@ class HouseTest < Minitest::Test
   def test_it_returns_house_details
     house = House.new("$400000", "123 sugar lane")
 
-    expected = {"price" => "$400000", "address" => "123 sugar lane"}
+    expected = {"price" => 400000, "address" => "123 sugar lane"}
     assert_equal expected, house.details
   end
 
